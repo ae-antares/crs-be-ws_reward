@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd ">
+    
+        <context:component-scan base-package="com.idr.dev" />
+        <mvc:annotation-driven />
+        <mvc:default-servlet-handler />
+        <context:component-scan base-package="com.idr.dev.service" />
+        <context:property-placeholder location="classpath:database.properties" order="1" ignore-unresolvable="true" />
+	
+    <!-- DataSource & SessionFactory Config -->
+        <!--/////// HIKARICP POOL FOR POSTGRES ////// -->
+        <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="shutdown">
+            <property name="driverClassName" value="#{systemProperties['database.driver'] != null ? systemProperties['database.driver'] : '${database.driver}'}" />
+            <property name="jdbcUrl" value="#{systemProperties['database.url'] != null ? systemProperties['database.url'] : '${database.url}'}"  />
+            <property name="username" value="#{systemProperties['database.user'] != null ? systemProperties['database.user'] : '${database.user}'}" />
+            <property name="password" value="#{systemProperties['database.password'] != null ? systemProperties['database.password'] : '${database.password}'}"  />
+            <property name="maximumPoolSize" value="#{systemProperties['database.maximumPoolSize'] != null ? systemProperties['database.maximumPoolSize'] : '${database.maximumPoolSize}'}"/>
+            <property name="connectionTestQuery" value="SELECT version()" />     
+            <property name="dataSourceProperties">
+                <props>
+                    <prop key="SetFloatAndDoubleUseBinary">true</prop>    
+                </props>
+            </property>
+        </bean>
+        <!-- Separator -->
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+            <property name="dataSource" ref="dataSource" />
+            <property name="typeAliasesPackage" value="com.idr.dev.model"/>
+            <property name="mapperLocations" value="classpath*:mapper/*.xml" />
+        </bean>
+        <!-- Separator -->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.idr.dev.mapper" />
+        </bean>
+        <!-- Separator -->
+        <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+            <constructor-arg index="0" ref="sqlSessionFactory" />
+        </bean>
+        <!-- Separator -->
+        <tx:annotation-driven transaction-manager="transactionManager" />
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource" />
+        </bean>
+    <!-- END DataSource & SessionFactory  Config -->
+</beans>

@@ -1,0 +1,5 @@
+com\idr\dev\mapper\Mapper_mainSERVICE.class
+com\idr\dev\model\In_MsgJSON.class
+com\idr\dev\service\Service_apiMain.class
+com\idr\dev\model\ess_MISC.class
+com\idr\dev\model\Out_MsgJSON.class
