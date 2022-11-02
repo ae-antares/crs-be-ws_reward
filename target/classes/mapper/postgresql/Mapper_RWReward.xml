@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idr.dev.mapper.Mapper_RWReward">
+<!-- MAPPING Reward Masterdata =============================================================================================== -->
+    <resultMap id="mapReward" type="RW_Reward">
+        <id property="ID" column="ID" />
+        <result property="REWARD_CODE" column="REWARD_CODE" />
+        <result property="REWARD_NAME" column="REWARD_NAME" />
+        <result property="REWARD_DESC" column="REWARD_DESC" />
+        
+        <result property="VALID_STARTDATE" column="VALID_STARTDATE" />
+        <result property="VALID_STARTDATE" column="VALID_STARTDATE" />
+        
+        <result property="REWARD_OUTPUT" column="REWARD_OUTPUT" />
+        <result property="LIFESPAN_MODE" column="LIFESPAN_MODE" />
+        <result property="LIFESPAN_MODE_INFO" column="LIFESPAN_MODE_INFO" />
+        <!---->
+        <association property="META" resultMap="com.idr.dev.mapper.Mapper_Essential.mapMeta" columnPrefix="MET_" />
+    </resultMap>
+<!-- END MAPPING Reward Masterdata =============================================================================================== -->   
+
+
+<!-- GET Reward Masterdata =============================================================================================== -->        
+    <select id="read_Reward" parameterType="ess_FILTER" resultMap="mapReward">
+        SELECT DISTINCT 
+            rwd.ID, REWARD_CODE, REWARD_NAME, REWARD_DESC, VALID_STARTDATE, VALID_ENDDATE,
+            REWARD_OUTPUT, LIFESPAN_MODE, LIFESPAN_MODE_INFO,
+            --
+            rwd.REQ_NUMBER AS MET_REQ_NUMBER, rwd.REQ_NUMBER_LASTUPDATE AS MET_REQ_NUMBER_LASTUPDATE,
+            rwd.CREATED_BY AS MET_CREATED_BY, rwd.CREATED_DATE AS MET_CREATED_DATE, 
+            rwd.MODIFIED_BY AS MET_MODIFIED_BY, rwd.MODIFIED_DATE AS MET_MODIFIED_DATE,
+            rwd.IS_DUMP AS IS_DUMP, rwd.ACTIVE_STATUS AS ACTIVE_STATUS
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_TOTALROWS"></include>
+        FROM public.mdata_REWARD rwd 
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_FILTER"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_ORDERBY"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_PAGINATION"></include>
+    </select>
+<!-- END GET Reward Masterdata =============================================================================================== -->    
+
+
+<!-- MANAGE Reward Masterdata =============================================================================================== --> 
+    <insert id="create_Reward" parameterType="RW_Reward">
+        INSERT INTO public.mdata_REWARD(
+            REWARD_CODE, REWARD_NAME, REWARD_DESC, VALID_STARTDATE, VALID_ENDDATE,
+            REWARD_OUTPUT, LIFESPAN_MODE, LIFESPAN_MODE_INFO,
+            CREATED_BY, IS_DUMP, ACTIVE_STATUS
+        )
+        VALUES(
+            #{REWARD_CODE}, #{REWARD_NAME}, #{REWARD_DESC}, #{VALID_STARTDATE}::timestamp, #{VALID_ENDDATEE}::timestamp, 
+            #{REWARD_OUTPUT}::public.mode_REWARD_OUTPUT, #{LIFESPAN_MODE}::public.mode_REWARD_LIFESPAN, #{LIFESPAN_MODE_INFO}, 
+            #{META.CREATED_BY}, false, true
+        )
+    </insert>
+    <!-- === -->
+    <update id="update_Reward" parameterType="RW_Reward">
+        UPDATE  public.mdata_REWARD
+        SET     MODIFIED_BY = #{META.MODIFIED_BY},
+                MODIFIED_DATE = NOW()
+                <if test="REWARD_NAME != null">,REWARD_NAME = #{REWARD_NAME}</if>
+                <if test="REWARD_DESC != null">,REWARD_DESC = #{REWARD_DESC}</if>
+                ---
+                <if test="VALID_STARTDATE != null">,VALID_STARTDATE = #{VALID_STARTDATE}::timestamp</if>
+                <if test="VALID_ENDDATE != null">,VALID_ENDDATE = #{VALID_ENDDATE}::timestamp</if>
+                ---
+                <if test="REWARD_OUTPUT != null">,REWARD_OUTPUT = #{REWARD_OUTPUT}::public.mode_REWARD_OUTPUT</if>
+                <if test="LIFESPAN_MODE != null">,LIFESPAN_MODE = #{LIFESPAN_MODE}::public.mode_REWARD_LIFESPAN</if>
+                <if test="LIFESPAN_MODE_INFO != null">,DATE_UNBOX = #{LIFESPAN_MODE_INFO}</if>
+        WHERE REWARD_CODE = #{REWARD_CODE}
+    </update>
+    <!-- === -->
+    <update id="delete_Reward" parameterType="RW_Reward">
+        UPDATE  public.mdata_REWARD
+        SET     ACTIVE_STATUS = CASE WHEN ACTIVE_STATUS THEN false ELSE true END,
+                MODIFIED_BY = #{META.MODIFIED_BY},
+                MODIFIED_DATE = NOW(),
+                ADDITIONAL_INFO = 'deleted'
+        WHERE REWARD_CODE = #{REWARD_CODE}
+    </update>
+    <!-- === -->
+<!-- END MANAGE Reward Masterdata =============================================================================================== -->  
+</mapper>

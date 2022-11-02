@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idr.dev.mapper.Mapper_MSMembership">
+<!-- MAPPING Reward Masterdata =============================================================================================== -->
+    <resultMap id="mapMembership" type="MS_Membership">
+        <id property="ID" column="ID" />
+        <id property="MEMBERSHIP_CODE" column="MEMBERSHIP_CODE" />
+        <result property="MEMBERSHIP_NAME" column="MEMBERSHIP_NAME" />
+        <result property="MEMBERSHIP_DESC" column="MEMBERSHIP_DESC" />
+        <result property="IS_REGISTERED" column="IS_REGISTERED" />
+        <!---->
+        <association property="META" resultMap="com.idr.dev.mapper.Mapper_Essential.mapMeta" columnPrefix="MET_" />
+        <association property="IMAGE" resultMap="com.idr.dev.mapper.Mapper_Essential.mapImage" columnPrefix="IMG_" />
+    </resultMap>
+<!-- END MAPPING Reward Masterdata =============================================================================================== -->   
+
+
+<!-- GET Reward Masterdata =============================================================================================== -->        
+    <select id="read_Membership" parameterType="ess_FILTER" resultMap="mapMembership">
+        SELECT DISTINCT 
+            mbs.ID, MEMBERSHIP_CODE, MEMBERSHIP_NAME, MEMBERSHIP_DESC, IS_REGISTERED, 
+            --
+            mbs.IMG_THUMB AS IMG_THUMB, mbs.IMG_MAIN AS IMG_THUMB, mbs.IMG_PATH AS IMG_THUMB, mbs.IS_MULTI_IMG AS IMG_THUMB,
+            --
+            mbs.REQ_NUMBER AS MET_REQ_NUMBER, mbs.REQ_NUMBER_LASTUPDATE AS MET_REQ_NUMBER_LASTUPDATE,
+            mbs.CREATED_BY AS MET_CREATED_BY, mbs.CREATED_DATE AS MET_CREATED_DATE, 
+            mbs.MODIFIED_BY AS MET_MODIFIED_BY, mbs.MODIFIED_DATE AS MET_MODIFIED_DATE,
+            mbs.IS_DUMP AS IS_DUMP, mbs.ACTIVE_STATUS AS ACTIVE_STATUS
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_TOTALROWS"></include>
+        FROM public.mdata_MEMBERSHIP mbs 
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_FILTER"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_ORDERBY"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_PAGINATION"></include>
+    </select>
+<!-- END GET Reward Masterdata =============================================================================================== -->    
+</mapper>
