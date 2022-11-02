@@ -1,5 +1,15 @@
+com\idr\dev\model\In_MsgReward.class
+com\idr\dev\model\RW_Reward.class
+com\idr\dev\service\Service_apiReward.class
+com\idr\dev\model\MS_Membership.class
+com\idr\dev\model\Out_MsgReward.class
+com\idr\dev\model\Out_MsgJSON.class
+com\idr\dev\mapper\Mapper_RWReward.class
 com\idr\dev\mapper\Mapper_mainSERVICE.class
 com\idr\dev\model\In_MsgJSON.class
 com\idr\dev\service\Service_apiMain.class
+com\idr\dev\service\Service_apiMembership.class
+com\idr\dev\mapper\Mapper_MSMembership.class
 com\idr\dev\model\ess_MISC.class
-com\idr\dev\model\Out_MsgJSON.class
+com\idr\dev\model\In_MsgMembership.class
+com\idr\dev\model\Data_InfoResponse.class
