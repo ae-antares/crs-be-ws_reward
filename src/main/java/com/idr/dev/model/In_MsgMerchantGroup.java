@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 
 @XmlRootElement
-public @Data class In_MsgMembership implements Serializable {
+public @Data class In_MsgMerchantGroup implements Serializable {
     //0. MAIN 
-    private MS_Membership FILTER;
+    private MG_MerchantGroup FILTER;
     private ess_PAGINATION PAGINATION;
 }

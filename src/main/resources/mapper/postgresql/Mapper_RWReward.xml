@@ -49,7 +49,7 @@
         VALUES(
             #{REWARD_CODE}, #{REWARD_NAME}, #{REWARD_DESC}, #{VALID_STARTDATE}::timestamp, #{VALID_ENDDATEE}::timestamp, 
             #{REWARD_OUTPUT}::public.mode_REWARD_OUTPUT, #{LIFESPAN_MODE}::public.mode_REWARD_LIFESPAN, #{LIFESPAN_MODE_INFO}, 
-            #{META.CREATED_BY}, false, true
+            #{META.CREATED_BY}, false, true 
         )
     </insert>
     <!-- === -->

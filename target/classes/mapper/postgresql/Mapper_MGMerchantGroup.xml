@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idr.dev.mapper.Mapper_MSMembership">
+<!-- MAPPING Merchant Group =============================================================================================== -->
+    <resultMap id="mapMerchantGroup" type="MG_MerchantGroup">
+        <id property="ID" column="ID" />
+        <id property="GROUP_CODE" column="GROUP_CODE" />
+        <result property="GROUP_NAME" column="GROUP_NAME" />
+        <result property="GROUP_DESC" column="GROUP_DESC" />
+        <result property="IS_REGISTERED" column="IS_REGISTERED" />
+        <!---->
+        <association property="META" resultMap="com.idr.dev.mapper.Mapper_Essential.mapMeta" columnPrefix="MET_" />
+    </resultMap>
+<!-- END MAPPING Merchant Group =============================================================================================== -->
+
+    <select id="read_MerchantGroup" paremeterType="ess_FILTER" resultMap="mapMerchantGroup">
+        SELECT DISTINCT
+            mcg.ID, GROUP_CODE, GROUP_NAME, GROUP_DESC,
+            --
+            mcg.REQ_NUMBER AS MET_REQ_NUMBER, mcg.REQ_NUMBER_LASTUPDATE AS MET_REQ_NUMBER_LASTUPDATE,
+            mcg.CREATED_BY AS MET_CREATED_BY, mcg.CREATED_DATE AS MET_CREATED_DATE, 
+            mcg.MODIFIED_BY AS MET_MODIFIED_BY, mcg.MODIFIED_DATE AS MET_MODIFIED_DATE,
+            mcg.IS_DUMP AS IS_DUMP, mcg.ACTIVE_STATUS AS ACTIVE_STATUS
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_TOTALROWS"></include>
+            FROM public.mdata_MERCHANT_GROUP mcg 
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_FILTER"></include>
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_ORDERBY"></include>
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_PAGINATION"></include>
+    </select>
+    
+    <insert id="create_MerchantGroup" parameterType="MG_MerchantGroup">
+        INSERT INTO public.mdata_MERCHANT_GROUP(
+            GROUP_CODE, GROUP_NAME, GROUP_DESC,
+            CREATED_BY, IS_DUMP, ACTIVE_STATUS
+        )
+        VALUES(
+            #{GROUP_CODE}, #{GROUP_NAME}, #{GROUP_DESC}, 
+            #{META.CREATED_BY}, false, true
+        )
+    </insert>
+
+    <update id="update_MerchantGroup" parameterType="MG_MerchantGroup">
+        UPDATE  public.mdata_MERCHANT_GROUP
+        SET     MODIFIED_BY = #{META.MODIFIED_BY},
+                MODIFIED_DATE = NOW()
+                <if test="GROUP_NAME != null">,GROUP_NAME = #{GROUP_NAME}</if>
+                <if test="GROUP_DESC != null">,GROUP_DESC = #{GROUP_DESC}</if>
+        WHERE GROUP_CODE = #{GROUP_CODE}
+    </update>
+    
+    <update id="delete_MerchantGroup" parameterType="MG_MerchantGroup">
+        UPDATE  public.mdata_MERCHANT_GROUP
+        SET     ACTIVE_STATUS = CASE WHEN ACTIVE_STATUS THEN false ELSE true END,
+                MODIFIED_BY = #{META.MODIFIED_BY},
+                MODIFIED_DATE = NOW(),
+                ADDITIONAL_INFO = 'deleted'
+        WHERE GROUP_CODE = #{GROUP_CODE}
+    </update>
+    
+</mapper>

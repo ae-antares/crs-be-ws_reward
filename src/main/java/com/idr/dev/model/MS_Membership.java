@@ -1,4 +1,4 @@
-package com.idr.dev.model;
+ package com.idr.dev.model;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,15 +1,21 @@
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\mapper\Mapper_mainSERVICE.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\service\Service_apiReward.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\Out_MsgJSON.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\ess_MISC.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\In_MsgReward.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\service\Service_apiMembership.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\mapper\Mapper_RWReward.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\In_MsgMembership.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\RW_Reward.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\Out_MsgReward.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\In_MsgJSON.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\MS_Membership.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\model\Data_InfoResponse.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\service\Service_apiMain.java
-D:\Work\project\IDR - Customer Reward System (CRS)\CRS_webservice_REWARD-1.0.0\src\main\java\com\idr\dev\mapper\Mapper_MSMembership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\In_MsgMerchantGroup.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\Out_MsgMembership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\service\Service_apiMembership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\Out_MsgMerchantGroup.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\RW_Reward.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\mapper\Mapper_RWReward.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\In_MsgReward.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\mapper\Mapper_mainSERVICE.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\MS_Membership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\service\Service_apiMerchantGroup.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\Data_InfoResponse.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\MG_MerchantGroup.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\Out_MsgReward.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\service\Service_apiReward.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\mapper\Mapper_MSMembership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\In_MsgJSON.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\service\Service_apiMain.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\mapper\Mapper_MGMerchantGroup.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\In_MsgMembership.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\ess_MISC.java
+C:\Users\NCEK\Documents\Folder Andre\Work\DEV-FT-Merchant-01\crs-be-ws_reward\src\main\java\com\idr\dev\model\Out_MsgJSON.java
