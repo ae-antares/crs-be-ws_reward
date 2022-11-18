@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("serviceMembership")
 public class Service_apiMembership {
     @Autowired private Mapper_MSMembership mapperMembership;
-    @Autowired private Service_Essential serviceEssential;
+//    @Autowired private Service_Essential serviceEssential;
     
     private static final int RES_OK_NO_CREATE = 200;
     private static final int RES_SUCCESS_CREATE = 201;

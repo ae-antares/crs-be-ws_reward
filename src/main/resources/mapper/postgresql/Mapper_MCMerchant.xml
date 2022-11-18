@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idr.dev.mapper.Mapper_MCMerchant">
+    <!-- MAPPING Mapper Masterdata =============================================================================================== -->
+    <resultMap id="mapMerchant" type="MC_Merchant">
+        <id property="ID" column="ID" />
+        <result property="MID" column="MID" />
+        <resault property="MERCHANT_NAME" column="MERCHANT_NAME" />
+        <result property="INDUSTRY_AREA" column="INDUSTRY_AREA" />
+        <result property="BANK_ACCOUNT_NUMBER" column="BANK_ACCOUNT_NUMBER" />
+
+        <result property="REF_ID" column="REF_ID" />
+        <result property="GROUP_INFO" column="GROUP_INFO" />
+        <!---->
+        <association property="META" resultMap="com.idr.dev.mapper.Mapper_Essential.mapMeta" columnPrefix="MET_" />
+    </resultMap>
+    <!-- END MAPPING Mapper Masterdata =============================================================================================== -->
+
+
+    <!-- GET Merchant Masterdata =============================================================================================== -->
+    <select id="read_Merchant" parameterType="ess_FILTER" resultMap="mapMerchant">
+            SELECT DISTINCT
+            mct.ID, MID, MERCHANT_NAME, INDUSTRY_AREA, BANK_ACCOUNT_NUMBER,
+            REF_ID, GROUP_INFO,
+            --
+            mct.REQ_NUMBER AS MET_REQ_NUMBER, mct.REQ_NUMBER_LASTUPDATE AS MET_REQ_NUMBER_LASTUPDATE,
+            mct.CREATED_BY AS MET_CREATED_BY, mct.CREATED_DATE AS MET_CREATED_DATE,
+            mct.MODIFIED_BY AS MET_MODIFIED_BY, mct.MODIFIED_DATE AS MET_MODIFIED_DATE,
+            mct.IS_DUMP AS IS_DUMP, mct.ACTIVE_STATUS AS ACTIVE_STATUS
+            <include refid="com.idr.dev.mapper.Mapper_Essential.inc_TOTALROWS"></include>
+        FROM public.mdata_MERCHANT mct
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_FILTER"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_ORDERBY"></include>
+        <include refid="com.idr.dev.mapper.Mapper_Essential.inc_PAGINATION"></include>
+    </select>
+    <!-- END GET MERCHANT Masterdata =============================================================================================== -->
+
+
+    <!-- MANAGE MERCHANT Masterdata =============================================================================================== -->
+    <insert id="create_MERCHANT" parameterType="MC_Merchant">
+        INSERT INTO public.mdata_MERCHANT(
+            MID, MERCHANT_NAME, INDUSTRY_AREA, BANK_ACCOUNT_NUMBER,
+            REF_ID, GROUP_INFO,
+            CREATED_BY, IS_DUMP, ACTIVE_STATUS
+        )
+        VALUES(
+            #{MID}, #{MERCHANT_NAME}, #{INDUSTRY_AREA}, #{BANK_ACCOUNT_NUMBER}, #{REF_ID},
+            #{GROUP_INFO}::public.info_HIERARCHY, #{REF_ID},
+            #{META.CREATED_BY}, false, true
+        )
+    </insert>
+    <!-- === -->
+    <update id="update_Merchant" parameterType="MC_MERCHANT">
+        UPDATE  public.mdata_MERCHANT
+        SET     MODIFIED_BY = #{META.MODIFIED_BY},
+        MODIFIED_DATE = NOW()
+        <if test="MID != null">,MID = #{MID}</if>
+        <if test="MERCHANT_NAME != null">,MERCHANT_NAME = #{MERCHANT_NAME}</if>
+        <if test="INDUSTRY_AREA != null">,INDUSTRY_AREA = #{INDUSTRY_AREA}</if>
+        <if test="BANK_ACCOUNT_NUMBER != null">,BANK_ACCOUNT_NUMBER = #{BANK_ACCOUNT_NUMBER}</if>
+        ---
+        <if test="REF_ID != null">,REF_ID = #{REF_ID}</if>
+        <if test="GROUP_INFO != null">,GROUP_INFO = #{GROUP_INFO}</if>
+        WHERE MID = #{MID}
+    </update>
+    <!-- === -->
+    <update id="delete_Merchant" parameterType="MC_Merchant">
+        UPDATE  public.mdata_Merchant
+        SET     ACTIVE_STATUS = CASE WHEN ACTIVE_STATUS THEN false ELSE true END,
+        MODIFIED_BY = #{META.MODIFIED_BY},
+        MODIFIED_DATE = NOW(),
+        ADDITIONAL_INFO = 'deleted'
+        WHERE MID = #{MID}
+    </update>
+    <!-- === -->
+    <!-- END MANAGE Merchant Masterdata =============================================================================================== -->
+</mapper>
