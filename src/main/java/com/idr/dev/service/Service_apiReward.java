@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("serviceReward")
 public class Service_apiReward {
     @Autowired private Mapper_RWReward mapperReward;
-    @Autowired private Service_Essential serviceEssential;
+//    @Autowired private Service_Essential serviceEssential;
     
     private static final int RES_OK_NO_CREATE = 200;
     private static final int RES_SUCCESS_CREATE = 201;

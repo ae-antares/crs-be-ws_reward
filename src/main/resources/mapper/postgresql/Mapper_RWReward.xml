@@ -7,20 +7,20 @@
         <result property="REWARD_CODE" column="REWARD_CODE" />
         <result property="REWARD_NAME" column="REWARD_NAME" />
         <result property="REWARD_DESC" column="REWARD_DESC" />
-        
+
         <result property="VALID_STARTDATE" column="VALID_STARTDATE" />
         <result property="VALID_STARTDATE" column="VALID_STARTDATE" />
-        
+
         <result property="REWARD_OUTPUT" column="REWARD_OUTPUT" />
         <result property="LIFESPAN_MODE" column="LIFESPAN_MODE" />
         <result property="LIFESPAN_MODE_INFO" column="LIFESPAN_MODE_INFO" />
         <!---->
         <association property="META" resultMap="com.idr.dev.mapper.Mapper_Essential.mapMeta" columnPrefix="MET_" />
     </resultMap>
-<!-- END MAPPING Reward Masterdata =============================================================================================== -->   
+<!-- END MAPPING Reward Masterdata =============================================================================================== -->
 
 
-<!-- GET Reward Masterdata =============================================================================================== -->        
+<!-- GET Reward Masterdata =============================================================================================== -->
     <select id="read_Reward" parameterType="ess_FILTER" resultMap="mapReward">
         SELECT DISTINCT 
             rwd.ID, REWARD_CODE, REWARD_NAME, REWARD_DESC, VALID_STARTDATE, VALID_ENDDATE,
